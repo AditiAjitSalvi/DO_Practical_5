@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     // Ensure the directory path is correct and accessible from Jenkins agent
-                    dir('D:/FAMTMCA/SEM2/Devops/practicalno05') { 
+                    dir('D:\FAMTMCA\SEM2\Devops\practicalno05\prac05q3') { 
                         docker.build("prac05q3", ".")
                     }
                 }
