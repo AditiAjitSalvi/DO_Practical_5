@@ -22,8 +22,8 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    // Ensure Docker container runs correctly
-                    docker.image("prac05q3").run("-d")  // Added -d to run in detached mode (optional)
+                    // Ensure Docker container runs correctly in detached mode
+                    docker.image("prac05q3").run("-d")  // Runs the container in detached mode
                 }
             }
         }
@@ -31,11 +31,9 @@ pipeline {
 
     post {
         always {
-            // Clean up Docker container after execution (optional)
+            // Clean up Docker container after execution (for Windows agents)
             script {
-                docker.image("prac05q3").inside {
-                    sh "docker container prune -f"
-                }
+                bat 'docker container prune -f'
             }
         }
     }
