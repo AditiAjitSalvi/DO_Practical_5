@@ -11,7 +11,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dir('D:\FAMTMCA\SEM2\Devops\practicalno05') { // assuming Dockerfile and HelloWorld.java are in Q3 folder
+                    // Ensure the directory path is correct and accessible from Jenkins agent
+                    dir('D:/FAMTMCA/SEM2/Devops/practicalno05') { 
                         docker.build("prac05q3", ".")
                     }
                 }
@@ -21,7 +22,19 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    docker.image("prac05q3").run()
+                    // Ensure Docker container runs correctly
+                    docker.image("prac05q3").run("-d")  // Added -d to run in detached mode (optional)
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean up Docker container after execution (optional)
+            script {
+                docker.image("prac05q3").inside {
+                    sh "docker container prune -f"
                 }
             }
         }
