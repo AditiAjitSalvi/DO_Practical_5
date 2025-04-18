@@ -11,8 +11,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dir('Q3') { // assuming Dockerfile and HelloWorld.java are in Q3 folder
-                        docker.build("java-hello-world-app", ".")
+                    dir('D:\FAMTMCA\SEM2\Devops\practicalno05') { // assuming Dockerfile and HelloWorld.java are in Q3 folder
+                        docker.build("prac05q3", ".")
                     }
                 }
             }
@@ -21,7 +21,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    docker.image("java-hello-world-app").run()
+                    docker.image("prac05q3").run()
                 }
             }
         }
